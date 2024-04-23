@@ -66,3 +66,18 @@ with st.form("entry_form", clear_on_submit=True):
                                 newline])
         finance.to_csv("finance.csv", index=False)
         st.success("Data saved!")
+
+with st.form("budget", clear_on_submit=True):
+    budget_grocery = st.number_input("grocery budget", min_value=0)
+    tranportation_grocery = st.number_input("transportation budget", min_value=0)
+    budget_total = st.number_input("Total budget", min_value=0)
+    "---"
+    submitted = st.form_submit_button("Save Budget Data")
+    if submitted:
+        budget = pd.DataFrame({"budget_grocery" : budget_grocery,
+                                    "tranportation_grocery": tranportation_grocery,
+                                    "budget_total":budget_total},
+                                    index=[0])
+    
+        budget.to_csv("budget.csv", index=False)
+        st.success("Data saved!")
